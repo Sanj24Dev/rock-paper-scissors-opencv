@@ -56,13 +56,6 @@ The system uses finger landmark positions from MediaPipe Hands to classify gestu
 * MediaPipe
 * keyboard (only used in img_detection.py for testing)
 
-Install dependencies using pip:
-
-bash
-Copy
-Edit
-pip install flask opencv-python mediapipe keyboard
-
 ## 📝 Notes
 * Webcam access is required.
 * Tested on Chrome and Firefox.
