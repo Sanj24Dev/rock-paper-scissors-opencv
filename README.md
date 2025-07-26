@@ -12,7 +12,7 @@ This project is a real-time Rock-Paper-Scissors game that uses your webcam to de
 &nbsp;&nbsp;&nbsp;&nbsp;├── paper.png        # Image shown for "Paper" <br>
 &nbsp;&nbsp;&nbsp;&nbsp;├── scissors.png     # Image shown for "Scissors" <br>
 &nbsp;&nbsp;&nbsp;&nbsp;└── question.png     # Placeholder image <br>
-├── requirements.txt                         # File for installing dependencies <br>
+└── requirements.txt                         # File for installing dependencies <br>
 
 
 ## 🚀 Features
