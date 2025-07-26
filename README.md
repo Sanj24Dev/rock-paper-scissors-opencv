@@ -3,16 +3,16 @@
 This project is a real-time Rock-Paper-Scissors game that uses your webcam to detect hand gestures using [MediaPipe](https://google.github.io/mediapipe/) and plays against a computer opponent. It is built using **Flask** for the web server and **OpenCV** for video capture.
 
 ## 📁 Project Structure
-├── app.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Main Flask application <br>
-├── img_detection.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Standalone test script for gesture detection <br>
+├── app.py                                   # Main Flask application <br>
+├── img_detection.py                         # Standalone test script for gesture detection <br>
 ├── templates/ <br>
-&nbsp;&nbsp;&nbsp;&nbsp;└── index.html &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Frontend HTML file served by Flask <br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── index.html       # Frontend HTML file served by Flask <br>
 ├── static/ <br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── rock.png &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Image shown for computer's "Rock" move <br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── paper.png &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Image shown for "Paper" <br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── scissors.png &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Image shown for "Scissors" <br>
-&nbsp;&nbsp;&nbsp;&nbsp;└── question.png &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Placeholder image <br>
-
+&nbsp;&nbsp;&nbsp;&nbsp;├── rock.png         # Image shown for computer's "Rock" move <br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── paper.png        # Image shown for "Paper" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── scissors.png     # Image shown for "Scissors" <br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── question.png     # Placeholder image <br>
+├── requirements.txt                         # File for installing dependencies <br>
 
 
 ## 🚀 Features
