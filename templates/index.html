@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rock-Paper-Scissors</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            /* Prevent scrolling */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+            color: #333;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f8ff, #e0ffff);
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            padding: 30px 0;
+            font-size: 3rem;
+            color: #00796b;
+            text-shadow: 1px 1px 2px #c8e6c9;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: calc(100vh - 100px);
+            padding: 20px;
+        }
+        
+        .block {
+            width: 30%;
+            height: 33rem;
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffffb8;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .block img {
+            border-radius: 10px;
+            max-width: 100%;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+        
+        #countdown {
+            font-size: 1.8rem;
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+        
+        .center-block {
+            width: 27%;
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffffc2;
+            border-radius: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .center-block h2 {
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 3rem;
+            border: none;
+            background: linear-gradient(to right, #26a69a, #00796b);
+            color: white;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: linear-gradient(to right, #004d40, #00796b);
+            transform: scale(1.05);
+        }
+        
+        #result {
+            font-size: 3rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .score-board p {
+            font-size: 2rem;
+            margin: 5px 0;
+            color: #00796b;
+            text-shadow: 1px 1px 2px #c8e6c9;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rock-Paper-Scissors</h1>
+    <p id="result">Welcome</p>
+    <div class="container">
+
+        <!-- Left Block: AI Move -->
+        <div class="block">
+            <h2>Computer's Move</h2>
+            <img id="comp-move" src="{{ url_for('static', filename='question.png') }}" width="400" height="400" alt="waiting">
+        </div>
+
+        <!-- Center Block: Play Button -->
+        <div class="center-block">
+            <div>
+                <div id="countdown">Press Play to start</div>
+                <form>
+                    <button id="play" type="submit">PLAY</button>
+                </form>
+
+
+                <div class="score-board">
+                    <h2 style="padding-top: 1rem;">Score Board</h2>
+                    <div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 20px;">
+                        <div style="display: flex; flex-direction: column;">
+                            <p>Computer</p>
+                            <p id="comp_score">0</p>
+                        </div>
+                        <div style="display: flex; flex-direction: column;">
+                            <p>User</p>
+                            <p id="user_score">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Block: Live Feed -->
+        <div class="block">
+            <h2>Your Move</h2>
+            <img src="{{ url_for('video') }}" width="400" height="400" alt="Your webcam">
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    const playBtn = document.getElementById('play');
+    const countdownEle = document.getElementById('countdown');
+    const computerMoveImg = document.getElementById('comp-move');
+    const resultEle = document.getElementById('result');
+    const userScoreEle = document.getElementById('user_score');
+    const compScoreEle = document.getElementById('comp_score');
+
+    playBtn.onclick = function(e) {
+        e.preventDefault(); // Prevent form from reloading
+
+        let timeLeft = 3;
+        resultEle.textContent = 'ROCK..';
+
+        let interval = setInterval(function() {
+            timeLeft--;
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                resultEle.textContent = 'Shoot!';
+
+                fetch('/play')
+                    .then(response => response.json())
+                    .then(data => {
+                        countdownEle.textContent = 'Play again?';
+                        const imageFilename = data.move.toLowerCase() + '.png';
+                        computerMoveImg.src = `/static/${imageFilename}`;
+                        resultEle.textContent = data.result;
+                        userScoreEle.textContent = data.user_score;
+                        compScoreEle.textContent = data.comp_score;
+                    })
+                    .catch(err => {
+                        countdownEle.textContent = 'Error occurred';
+                    });
+            } else {
+                if (timeLeft === 2) {
+                    resultEle.textContent = 'PAPER..';
+                } else if (timeLeft === 1) {
+                    resultEle.textContent = 'SCISSORS..';
+                }
+            }
+        }, 1000);
+    };
+</script>
